@@ -1,0 +1,14 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 500ms, opacity 500ms; /* до запятой свойство видимости c задержкой, после - прозрачность. Время задержки не должно быть меньше времени, за которое наступает полная прозрачность */
+}

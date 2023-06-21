@@ -1,0 +1,11 @@
+.element__mask-group {
+  display: block;
+  width: 282px;
+  height: 282px;
+  grid-area: mask-group;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  color: #000000;
+  font-size: 15px;
+  cursor: pointer;
+}

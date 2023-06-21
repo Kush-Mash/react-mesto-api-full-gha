@@ -1,0 +1,6 @@
+.popup__img {
+  margin: 0;
+  padding: 60px 0 0 calc(155px - 36px);
+  width: 120px;
+  height: 120px;
+}

@@ -1,0 +1,8 @@
+.entry {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 36px 400px;
+  margin: 0 auto;
+}
