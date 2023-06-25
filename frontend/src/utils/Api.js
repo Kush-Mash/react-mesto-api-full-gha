@@ -89,9 +89,11 @@ class Api {
 }
 
 export const api = new Api({
-  basePath: "https://mesto.nomoreparties.co/v1/cohort-61",
+  // basePath: "https://mesto.nomoreparties.co/v1/cohort-61",
+  basePath: "http://localhost:3000",
   headers: {
-    authorization: "545040d2-ca8d-4af4-bb28-cd05a11607d7",
+    // authorization: "545040d2-ca8d-4af4-bb28-cd05a11607d7",
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",
   },
 });

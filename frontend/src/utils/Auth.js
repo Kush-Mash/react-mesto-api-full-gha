@@ -1,5 +1,5 @@
-// export const base_URL = 'http://104.131.160.75:3000';
-export const base_URL = 'https://auth.nomoreparties.co';
+export const base_URL = 'http://localhost:3000';
+// export const base_URL = 'https://auth.nomoreparties.co';
 
 const headers = {
   'Accept': 'application/json',

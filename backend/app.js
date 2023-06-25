@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
+app.use(cors());
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
   .then(() => {

@@ -1,7 +1,6 @@
 {
   "name": "react-mesto-auth",
   "version": "0.1.0",
-  "homepage": "https://kush-mash.github.io/react-mesto-auth/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "scp -r ./build/* kush-mash@158.160.74.38:/home/react-mesto-api-full-gha/frontend"
   },
   "eslintConfig": {
     "extends": [

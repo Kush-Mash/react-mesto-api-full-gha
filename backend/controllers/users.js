@@ -25,7 +25,7 @@ const login = (req, res, next) => {
         throw new UnauthorizedError('Пользователь не авторизован');
       }
       const token = signToken({ _id: user._id });
-      res.send({ message: 'авторизован', token });
+      res.send({ token });
     })
     .catch((err) => {
       if (err.message === 'Unauthorized') {
