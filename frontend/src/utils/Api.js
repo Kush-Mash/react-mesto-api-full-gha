@@ -2,10 +2,6 @@
 // Идентификатор группы: cohort-61
 // Адрес сервера проекта Mesto: https://mesto.nomoreparties.co.
 
-// Идентификатор группы должен быть в URL сразу после v1. Всегда обращайтесь к своей группе. Если обратиться к чужой, сервер вернёт ошибку.
-
-// GET https://nomoreparties.co/v1/cohortId/users/me
-
 class Api {
   constructor({ basePath, headers }) {
     this._basePath = basePath;
@@ -90,7 +86,7 @@ class Api {
 
 export const api = new Api({
   // basePath: "https://mesto.nomoreparties.co/v1/cohort-61",
-  basePath: "http://localhost:3000",
+  basePath: "http://localhost:3001",
   headers: {
     // authorization: "545040d2-ca8d-4af4-bb28-cd05a11607d7",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
