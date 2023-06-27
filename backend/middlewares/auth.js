@@ -3,11 +3,13 @@ const { checkToken } = require('../utils/jwtAuth');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 const auth = (req, res, next) => {
-  if (!req.headers.authorization) {
-    throw new UnauthorizedError('Пользователь не авторизован');
+  const { authorization } = req.headers;
+
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    throw new UnauthorizedError('Необходима авторизация');
   }
 
-  const token = req.headers.authorization.replace('Bearer ', '');
+  const token = authorization.replace('Bearer ', '');
 
   try {
     const payload = checkToken(token);

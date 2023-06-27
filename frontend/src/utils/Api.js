@@ -1,11 +1,6 @@
-// Токен: 545040d2-ca8d-4af4-bb28-cd05a11607d7
-// Идентификатор группы: cohort-61
-// Адрес сервера проекта Mesto: https://mesto.nomoreparties.co.
-
 class Api {
-  constructor({ basePath, headers }) {
+  constructor({ basePath }) {
     this._basePath = basePath;
-    this._headers = headers;
   }
 
   _getJson(res) {
@@ -15,16 +10,28 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  // не забыть зарефакторить!
+  // setToken(token) {
+  //   this._headers.authorization = `Bearer ${token}`;
+  // }
+
   getServerCards() {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/cards`, {
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
     }).then(this._getJson);
   }
 
   postNewCard(data) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -34,16 +41,24 @@ class Api {
 
   // Получить данные о пользователе
   getCurrentUser() {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/users/me`, {
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     }).then(this._getJson);
   }
 
   // Обновить данные пользователя
   updateUserInfo(data) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.job,
@@ -51,11 +66,14 @@ class Api {
     }).then(this._getJson);
   }
 
-  // Обновить аватар
   updateAvatar(data) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -63,33 +81,41 @@ class Api {
   }
 
   deleteCard(_id) {
+    const token = localStorage.getItem('jwt');
     return fetch(`${this._basePath}/cards/${_id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     }).then(this._getJson);
   }
 
   changeLikeCardStatus(_id, isLiked) {
+    const token = localStorage.getItem('jwt');
     if (isLiked) {
       return fetch(`${this._basePath}/cards/${_id}/likes`, {
         method: "PUT",
-        headers: this._headers,
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }).then(this._getJson);
     } else {
       return fetch(`${this._basePath}/cards/${_id}/likes`, {
         method: "DELETE",
-        headers: this._headers,
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
       }).then(this._getJson);
     }
   }
 }
 
 export const api = new Api({
-  // basePath: "https://mesto.nomoreparties.co/v1/cohort-61",
-  basePath: "http://localhost:3001",
+  basePath: "http://localhost:3000",
   headers: {
-    // authorization: "545040d2-ca8d-4af4-bb28-cd05a11607d7",
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     "Content-Type": "application/json",
   },
 });

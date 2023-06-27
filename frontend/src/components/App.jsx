@@ -36,13 +36,16 @@ function App() {
   })
 
   useEffect(() => {
-    Promise.all([api.getCurrentUser(), api.getServerCards()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const token = localStorage.getItem('jwt');
+    if (token){
+      Promise.all([api.getCurrentUser(), api.getServerCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -76,7 +79,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some(id => id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
@@ -154,22 +157,25 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [])
+  }, [loggedIn])
 
   const tokenCheck = () => {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит, действующий он или нет
-    const jwt = localStorage.getItem('jwt');
-    if (jwt){
+    const token = localStorage.getItem('jwt');
+    if (token){
       // проверим токен
-      auth.checkToken(jwt)
+      auth.checkToken(token)
         .then((res) => {
           // авторизуем пользователя
           setLoggedIn(true);
-          setEmail(res.data.email);
+          setEmail(res.email);
           navigate('/', {replace: true});
         })
-        .catch(err => console.log(err))
+        .catch((err) => {
+          localStorage.removeItem('jwt');
+          console.log(err);
+        })
     }
   }
 
