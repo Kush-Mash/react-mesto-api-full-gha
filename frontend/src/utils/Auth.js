@@ -1,5 +1,5 @@
-export const base_URL = 'http://localhost:3000';
-// export const base_URL = 'https://auth.nomoreparties.co';
+// export const base_URL = 'http://localhost:3000';
+export const base_URL = 'https://api.mesto.kush-mash.nomoreparties.sbs';
 
 const headers = {
   'Accept': 'application/json',

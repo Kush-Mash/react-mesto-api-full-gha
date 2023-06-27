@@ -114,7 +114,8 @@ class Api {
 }
 
 export const api = new Api({
-  basePath: "http://localhost:3000",
+  // basePath: "http://localhost:3000",
+  basePath: "https://api.mesto.kush-mash.nomoreparties.sbs",
   headers: {
     "Content-Type": "application/json",
   },

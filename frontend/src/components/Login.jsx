@@ -1,6 +1,5 @@
 import React from 'react';
 import EntryForm from './EntryForm.jsx';
-import api from '../utils/Api.js';
 
 function Login(props) {
 
