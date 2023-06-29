@@ -19,6 +19,7 @@ function EntryForm(props) {
         name="password"
         type="password"
         placeholder="Пароль"
+        minLength="6"
         value={props.formValue.password}
         onChange={props.onChange}
       />

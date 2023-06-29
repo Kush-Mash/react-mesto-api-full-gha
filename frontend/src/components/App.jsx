@@ -41,6 +41,7 @@ function App() {
       Promise.all([api.getCurrentUser(), api.getServerCards()])
         .then(([user, cards]) => {
           setCurrentUser(user);
+          cards.reverse();
           setCards(cards);
         })
         .catch((err) => console.log(err));
@@ -157,12 +158,12 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, [loggedIn])
+  }, [])
 
   const tokenCheck = () => {
+    const token = localStorage.getItem('jwt');
     // если у пользователя есть токен в localStorage,
     // эта функция проверит, действующий он или нет
-    const token = localStorage.getItem('jwt');
     if (token){
       // проверим токен
       auth.checkToken(token)
@@ -216,6 +217,7 @@ function App() {
         formValue.password
       )
       .then((res) => {
+        localStorage.setItem('jwt', res.token);
         if (res){
           setEmail(formValue.email);
           setFormValue({email: '', password: ''});

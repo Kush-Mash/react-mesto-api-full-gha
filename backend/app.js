@@ -4,9 +4,13 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
+const ALLOWED_CORS = require('./utils/cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ALLOWED_CORS,
+  credentials: true,
+}));
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
   .then(() => {
