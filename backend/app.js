@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const ALLOWED_CORS = require('./utils/cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
@@ -14,12 +15,14 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 app.use(router);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
